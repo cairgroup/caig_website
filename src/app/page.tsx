@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen w-screen flex-col items-start justify-between sm:p-8 md:p-12 overflow-hidden bg-matte-black-radial text-white">
+    <main className="flex min-h-screen w-screen flex-col items-start justify-between p-12 overflow-hidden bg-matte-black-radial text-white">
         <div className="animate-fade-up flex flex-col items-start justify-start sm:pt-2 md:pt-24">
           <Image src="/logo.png" alt="CAIRG" height={75} width={75} className="mb-2"/>
           <h1 className='text-6xl mb-3 text-white'>Cambridge AI Reading Group</h1>
