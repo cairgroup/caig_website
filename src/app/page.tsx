@@ -5,14 +5,14 @@ export default function Home() {
     <main className="flex min-h-screen w-screen flex-col items-start justify-between sm:p-5 md:p-12 overflow-hidden bg-matte-black-radial text-white">
         <div className="animate-fade-up flex flex-col items-start justify-start sm:pt-2 md:pt-24">
           <Image src="/logo.png" alt="CAIRG" height={75} width={75} className="mb-2"/>
-          <h1 className='sm:text-4xl md:text-6xl mb-3 text-white'>Cambridge AI Reading Group</h1>
+          <h1 className='sm:text-5xl md:text-6xl mb-3 text-white'>Cambridge AI Reading Group</h1>
           <h3 className='text-xl italic text-white'>Mondays @ 7 PM</h3>
         </div>
 
         <div className="animate-fade-up flex flex-col sm:items-center md:items-end justify-start w-full">
           <a target="_blakn" 
             href="mailto:ronnachum@college.harvard.edu?subject=Interest%20in%20Cambridge%20AI%20Reading%20Group&body=Your%20background%20working%20with%20AI%20and%20why%20you're%20interested%20in%20joining..." 
-            className="mb-3 sm:w-3/4 md:w-1/3 inline-block px-6 py-3 text-white border-[1px] border-white bg-gray-900 rounded-lg hover:rounded-3xl hover:shadow-md transition-all ease-in-out 2s text-center"
+            className="mb-3 sm:w-2/3 md:w-1/3 inline-block px-6 py-3 text-white border-[1px] border-white bg-gray-900 rounded-lg hover:rounded-3xl hover:shadow-md transition-all ease-in-out 2s text-center"
           >
             <h3>Join the group!</h3>
           </a>
