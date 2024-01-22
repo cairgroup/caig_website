@@ -22,7 +22,7 @@ export default function Home() {
         <h2 className='text-2xl mb-3'>Supported By</h2>
         <div className="flex flex-row items-center justify-center w-screen h-[100px]">
           <div className="flex flex-col items-center justify-center w-1/3 h-[100px]">
-            <Image src="/EF_white.png" alt="EntrepreneurFirst" height={100} width={250}/>
+            <Image src="/EF_white.png" alt="EntrepreneurFirst" height={160} width={350}/>
           </div>
           <div className="flex flex-col items-center justify-center w-1/3 h-[100px]">
             <Image src='/pear_white.png' alt="PearVC" height={20} width={150}/>
