@@ -107,11 +107,11 @@ module.exports = {
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
-    plugin(({ addVariant }) => {
+    plugin(({ addVariant }: { addVariant: Function }) => {
       addVariant("radix-side-top", '&[data-side="top"]');
       addVariant("radix-side-bottom", '&[data-side="bottom"]');
     }),
-    plugin(({ addUtilities }) => {
+    plugin(({ addUtilities }: { addUtilities: (utilities: any) => void }) => {
       addUtilities({
         '.underline-animation': {
           position: 'relative',
