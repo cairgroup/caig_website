@@ -19,7 +19,7 @@ export default function Home() {
           {/* <h2>More Info Coming Soon...</h2> */}
         </div>
 
-        <div className="animate-fade-up flex flex-col items-center justify-start h-32 pb-36 w-full">
+        <div className="animate-fade-up flex flex-col items-center justify-start h-32 mb-12 w-full">
           <h2 className='text-2xl mb-3 text-white'>Supported By</h2>
           <div className="flex flex-row items-center justify-center w-screen h-[100px]">
             <div className="flex flex-col items-center justify-center w-1/3 h-[100px]">
