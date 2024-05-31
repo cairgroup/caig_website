@@ -1,10 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 const plugin = require("tailwindcss/plugin");
+const colors = require('tailwindcss/colors')
 
 module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}"
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
   future: {
     hoverOnlyWhenSupported: true,
@@ -16,6 +19,16 @@ module.exports = {
         'gray-custom-darker': '#0d0d0d',
         'blue-custom': '#4457ce',
         'blue-custom-darker': '#232b61',
+
+        'background': '#FAFAFA',
+        'background_2': '#ECEFF1',
+        'primary': '#1A237E',
+        'primary_2': '#546E7A',
+        'highlight': '#00ACC1',
+
+        'dark_background': colors.zinc[800],
+        'dark_background_2': colors.zinc[950],
+        'dark_text': colors.zinc[400],
       },
       fontFamily: {
         display: ["var(--font-sf)", "system-ui", "sans-serif"],
@@ -135,7 +148,7 @@ module.exports = {
         },
         '.new-content': {
           opacity: 0,
-          // height: 0,
+          height: 0,
         },
         '.fade-in': {
           opacity: 1,
