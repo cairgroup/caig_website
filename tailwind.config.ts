@@ -26,9 +26,13 @@ module.exports = {
         'primary_2': '#546E7A',
         'highlight': '#00ACC1',
 
-        'dark_background': colors.zinc[800],
+        'dark_background': '#FAFAFA',
         'dark_background_2': colors.zinc[950],
-        'dark_text': colors.zinc[400],
+        'dark_text':'#4457ce',
+
+        // 'dark_background': colors.zinc[800],
+        // 'dark_background_2': colors.zinc[950],
+        // 'dark_text': colors.zinc[400],
       },
       fontFamily: {
         display: ["var(--font-sf)", "system-ui", "sans-serif"],

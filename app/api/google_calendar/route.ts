@@ -16,7 +16,8 @@ async function listEvents(): Promise<Event[] | undefined> {
     console.log('No upcoming events found.');
     return;
   }
-  console.log('Upcoming 10 events:');
+
+  console.log(fetchedEvents.map((event) => `${event.summary} - ${event.start?.dateTime} -> ${event.end?.dateTime}`).join('\n'));
 
   let events: Event[] = [];
 

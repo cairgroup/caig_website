@@ -44,15 +44,17 @@ export default function UpcomingEvents() {
   const [events, setEvents] = useState<Event[]>([]);
 
   useEffect(() => {
-    async function fetchEssayFeedback() {
+    async function fetchEvents() {
       const data: { message: Event[], error: any, status: number } = await fetch('/api/google_calendar', {
         method: 'GET',
       }).then((response) => response.json());
       setEvents(data.message);
     }
 
-    fetchEssayFeedback();
+    fetchEvents();
   }, []);
+
+  console.log(events)
 
   const days = 7;
   const [closestSunday, setClosestSunday] = useState<Date>(getStartOfWeek(new Date(), days));
@@ -63,11 +65,15 @@ export default function UpcomingEvents() {
         <TypographyH1 className='lg:text-3xl md:text-3xl mb-3 text-primary align-middle'>
           Upcoming Events
         </TypographyH1>
-        <Link target="_blank" href="https://calendar.google.com/calendar/u/0?cid=Y19iODJlN2Y2NDk5ZjQwNWQ2NDFhMmRkMTBhZmQzOTg2Njk0NzNlZTc3ZTRiOGYzZmU4NTFiZThkMWEyNTljZjliQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" className="align-top">
+        <Link
+          target="_blank"
+          href="https://calendar.google.com/calendar/u/0?cid=Y19iODJlN2Y2NDk5ZjQwNWQ2NDFhMmRkMTBhZmQzOTg2Njk0NzNlZTc3ZTRiOGYzZmU4NTFiZThkMWEyNTljZjliQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"
+          className="align-top"
+        >
           <Button
             variant="default"
             size="default"
-            className="text-xl border-primary border-2 bg-background hover:bg-primary hover:text-background group flex items-center"
+            className="text-xl border-primary border-2 bg-background hover:bg-primary text-primary hover:text-background group flex items-center"
           >
             Export Calendar
             <Icons.export className="ml-2" />

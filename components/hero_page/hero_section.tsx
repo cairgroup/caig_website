@@ -2,12 +2,12 @@ import Link from "next/link";
 import { TypographyH1, TypographyH3 } from "../ui/typography";
 import { Button } from "../ui/button";
 import { Icons } from "../icons";
-import Image from "next/image";
+import { HeroSectionImages } from "./images";
 
 export default function HeroSection() {
   return (
     <div className="flex flex-col md:flex-row-reverse justify-center align-middle gap-4 max-w-[900px]">
-      <Image src="/main.png" alt="Hero Image" width={900} height={600} className="animate-fade-up md:w-[350px] lg:w-auto rounded-md shadow-md" />
+      <HeroSectionImages />
 
       <div className="flex flex-col justify-center align-middle">
         <div className="animate-fade-up flex flex-col items-start justify-start">

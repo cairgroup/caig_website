@@ -38,22 +38,22 @@ const ScheduleMatrix: React.FC<ScheduleMatrixProps> = ({ start_date, days, event
   }
 
   return (
-    <div className="flex flex-row max-w-full max-h-full border overflow-clip rounded-lg text-background bg-dark_background">
+    <div className="flex flex-row max-w-full max-h-full border overflow-clip rounded-lg text-primary bg-background">
       {/* Hours */}
-      <table className="h-full table-fixed bg-dark_background_2 rounded-lg">
+      <table className="h-full table-fixed bg-background rounded-lg">
         <thead>
-          <tr className="bg-dark_background">
-            <th className="py-1 font-medium text-sm border-b-dark_background">&nbsp;</th>
+          <tr className="bg-primary">
+            <th className="py-1 font-medium text-sm border-b-primary">&nbsp;</th>
           </tr>
-          <tr className="bg-dark_background">
-            <th className="py-1 font-medium text-sm border-b-dark_background">&nbsp;</th>
+          <tr className="bg-primary">
+            <th className="py-1 font-medium text-sm border-b-primary">&nbsp;</th>
           </tr>
         </thead>
         <tbody>
           {hours.map((hour) => (
             <React.Fragment key={hour}>
-              <tr className="h-12 divide-dark_background divide-x">
-                <td className="pl-4 pr-2 py-2 font-light text-xs text-end text-dark_text">{hour}</td>
+              <tr className="h-12 divide-primary divide-x">
+                <td className="pl-4 pr-2 py-2 font-light text-xs text-end text-primary">{hour}</td>
               </tr>
             </React.Fragment>
           ))}
@@ -61,33 +61,33 @@ const ScheduleMatrix: React.FC<ScheduleMatrixProps> = ({ start_date, days, event
       </table>
 
       {/* Days */}
-      <table className="w-full h-full table-fixed bg-dark_background_2 rounded-lg border-l border-l-dark_background overflow-x-scroll">
+      <table className="w-full h-full table-fixed bg-background rounded-lg border-l border-l-primary overflow-x-scroll">
         <thead>
-          <tr className="bg-dark_background">
+          <tr className="bg-primary">
             {Array.from({ length: days }, (_, i) => {
               const counting_date = new Date(start_date);
               counting_date.setDate(counting_date.getDate() + i);
 
               return (
-                <th key={i} className="py-2 font-medium text-sm" style={{ minWidth: '4.5rem' }}>
+                <th key={i} className="py-2 font-medium text-sm text-background_2" style={{ minWidth: '4.5rem' }}>
                   <div className="text-center m-0">{counting_date.toLocaleDateString('en-US')}</div>
                   {counting_date.toLocaleDateString('en-US') === new Date().toLocaleDateString('en-US') ? (
                     <div className="text-center w-full flex justify-center items-center">
-                      <TypographyP className='bg-background_2 text-primary leading-0 rounded-full px-3'>
+                      <TypographyP className='bg-background text-primary leading-0 rounded-full px-3'>
                         {counting_date.toLocaleDateString('en-US', { weekday: 'short' })}
                       </TypographyP>
                     </div>
                   ) : (
-                    <div className="text-center">{counting_date.toLocaleDateString('en-US', { weekday: 'short' })}</div>
+                    <div className="text-center text-background_2">{counting_date.toLocaleDateString('en-US', { weekday: 'short' })}</div>
                   )}
                 </th>
               );
             })}
           </tr>
         </thead>
-        <tbody className="divide-y divide-dark_background">
+        <tbody className="divide-y divide-primary">
           {Array.from({ length: hours.length * 2 }).map((_, slotIndex) => (
-            <tr key={slotIndex} className="h-6 divide-x divide-dark_background">
+            <tr key={slotIndex} className="h-6 divide-x divide-primary">
               {Array.from({ length: days }, (_, i) => {
                 const counting_date = new Date(start_date);
                 counting_date.setDate(counting_date.getDate() + i);
