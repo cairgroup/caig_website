@@ -54,8 +54,6 @@ export default function UpcomingEvents() {
     fetchEvents();
   }, []);
 
-  console.log(events)
-
   const days = 7;
   const [closestSunday, setClosestSunday] = useState<Date>(getStartOfWeek(new Date(), days));
 

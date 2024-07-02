@@ -14,6 +14,9 @@ module.exports = {
   },
   theme: {
     extend: {
+      aspectRatio: {
+        '5/7': '5 / 7',
+      },
       colors: {
         'gray-custom': '#151515',
         'gray-custom-darker': '#0d0d0d',
@@ -22,13 +25,14 @@ module.exports = {
 
         'background': '#FAFAFA',
         'background_2': '#ECEFF1',
+        'background_3': colors.zinc[300],
         'primary': '#1A237E',
         'primary_2': '#546E7A',
         'highlight': '#00ACC1',
 
-        'dark_background': '#FAFAFA',
-        'dark_background_2': colors.zinc[950],
-        'dark_text':'#4457ce',
+        // 'dark_background': '#FAFAFA',
+        // 'dark_background_2': colors.zinc[950],
+        // 'dark_text':'#4457ce',
 
         // 'dark_background': colors.zinc[800],
         // 'dark_background_2': colors.zinc[950],
@@ -53,6 +57,8 @@ module.exports = {
         "underline": 'underline 1s ease-in-out infinite',
         'text-clear': 'text-clear 5s forwards',
         'text-fade-in': 'text-fade-in 2s forwards',
+        // Card hover
+        'card-hover': 'card-hover 0.4s ease-out',
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -112,6 +118,10 @@ module.exports = {
         'text-fade-in': {
           '0%': { opacity: 0 },
           '100%': { opacity: 1 },
+        },
+        'card-hover': {
+          '0%': { transform: 'translate(-75%, 16%) rotate(-24deg)' },
+          '100%': { transform: 'translate(-25%, 8%) rotate(-8deg)' },
         },
       },
     },

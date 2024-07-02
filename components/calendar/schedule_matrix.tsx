@@ -53,7 +53,7 @@ const ScheduleMatrix: React.FC<ScheduleMatrixProps> = ({ start_date, days, event
           {hours.map((hour) => (
             <React.Fragment key={hour}>
               <tr className="h-12 divide-primary divide-x">
-                <td className="pl-4 pr-2 py-2 font-light text-xs text-end text-primary">{hour}</td>
+                <td className="pl-4 pr-2 py-2 font-bold text-xs text-end text-primary">{hour}</td>
               </tr>
             </React.Fragment>
           ))}
@@ -85,9 +85,9 @@ const ScheduleMatrix: React.FC<ScheduleMatrixProps> = ({ start_date, days, event
             })}
           </tr>
         </thead>
-        <tbody className="divide-y divide-primary">
+        <tbody className="divide-y divide-background_3">
           {Array.from({ length: hours.length * 2 }).map((_, slotIndex) => (
-            <tr key={slotIndex} className="h-6 divide-x divide-primary">
+            <tr key={slotIndex} className="h-6 divide-x divide-background_3">
               {Array.from({ length: days }, (_, i) => {
                 const counting_date = new Date(start_date);
                 counting_date.setDate(counting_date.getDate() + i);
@@ -98,16 +98,17 @@ const ScheduleMatrix: React.FC<ScheduleMatrixProps> = ({ start_date, days, event
                       {events
                         .filter((event) => new Date(event.date).toLocaleDateString() === counting_date.toLocaleDateString())
                         .filter((event) => {
-                          const startSlot = getTimeSlot(new Date(event.date).toLocaleTimeString('en-US'));
-                          const time = slotIndex * 30 + starting_hour; // Assuming the day starts at 1PM (780 minutes)
+                          const startSlot = getTimeSlot(new Date(event.date).toLocaleTimeString('en-US', { timeZone: 'America/New_York' }));
+                          const time = slotIndex * 30 + starting_hour;
                           return time === startSlot;
                         })
                         .map((event, index) => {
+                          console.log(event);
                           const eventHeight = (event.duration / 30) * 1.5;
                           return (
                             <div
                               key={`${index}`}
-                              className={`absolute text-md break-words font-semibold rounded-sm overflow-y-auto no-scrollbar z-10 hover:cursor-pointer border text-background ${event.color} p-1`}
+                              className={`absolute text-md break-words font-semibold rounded-sm overflow-y-auto z-10 hover:cursor-pointer border text-background ${event.color} p-1`}
                               style={{
                                 fontSize: '0.7rem',
                                 lineHeight: '1rem',
@@ -117,9 +118,9 @@ const ScheduleMatrix: React.FC<ScheduleMatrixProps> = ({ start_date, days, event
                               }}
                             >
                               <div className="flex flex-col">
-                                <TypographyP className='leading-2 m-0 p-0'>{event.title}</TypographyP>
+                                <TypographyP className='leading-2 m-0 p-0 overflow-hidden'>{event.title}</TypographyP>
                                 <div className="font-normal">
-                                  {new Date(event.date).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' })} - {event.duration} min
+                                  {new Date(event.date).toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: 'numeric', minute: 'numeric' })} - {event.duration} min
                                 </div>
                               </div>
                             </div>

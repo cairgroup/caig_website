@@ -6,20 +6,24 @@ import { HeroSectionImages } from "./images";
 
 export default function HeroSection() {
   return (
-    <div className="flex flex-col md:flex-row-reverse justify-center align-middle gap-4 max-w-[900px]">
+    <div className="flex flex-col-reverse lg:flex-row-reverse justify-center items-center align-middle gap-4 max-w-[900px] pb-10">
       <HeroSectionImages />
 
       <div className="flex flex-col justify-center align-middle">
         <div className="animate-fade-up flex flex-col items-start justify-start">
           <div className="w-full flex justify-start">
-            <TypographyH1 className="lg:text-6xl md:text-6xl text-primary text-center">Cambridge AI Group</TypographyH1>
+            <TypographyH1 className="lg:text-6xl lg:pr-20 md:text-6xl text-left mb-6">
+              <span className="before:block before:absolute before:-inset-2 before:-skew-y-2 before:bg-highlight relative inline-block p-3">
+                <span className="relative text-white">The Cambridge AI Group</span>
+              </span>
+            </TypographyH1>
           </div>
           <TypographyH3 className='lg:text-3xl md:text-3xl mb-3 text-primary text-center sm:text-left w-full align-middle'>
             Advancing AI Innovation Through Collaborative Learning
           </TypographyH3>
         </div>
 
-        <div className="animate-fade-up flex flex-col items-center md:items-start justify-center w-full">
+        <div className="animate-fade-up flex flex-col md:flex-row lg:flex-col items-center lg:items-start justify-center w-full">
           <Link target="_blank" href="/#" className="m-3">
             <Button
               variant="default"
