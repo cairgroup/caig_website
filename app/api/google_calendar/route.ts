@@ -17,8 +17,6 @@ async function listEvents(): Promise<Event[] | undefined> {
     return;
   }
 
-  console.log(fetchedEvents.map((event) => `${event.summary} - ${event.start?.dateTime} -> ${event.end?.dateTime}`).join('\n'));
-
   let events: Event[] = [];
 
   fetchedEvents.forEach((event) => {

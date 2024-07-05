@@ -28,6 +28,7 @@ import {
   Pencil,
   SquareArrowOutUpRight,
   type LucideProps,
+  ArrowLeft,
 } from "lucide-react";
 
 export const Icons = {
@@ -47,6 +48,7 @@ export const Icons = {
   warning: AlertTriangle,
   user: User,
   arrowRight: ArrowRight,
+  arrowLeft: ArrowLeft,
   help: HelpCircle,
   pizza: Pizza,
   sun: SunMedium,
