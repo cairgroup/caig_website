@@ -10,7 +10,7 @@ interface BlogPostLayoutProps {
 }
 
 const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) => {
-  const [interactiveBlocksState, setInteractiveBlocksState] = useState<{ [id: string] : JSX.Element; }>({});
+  const [interactiveBlocksState, setInteractiveBlocksState] = useState<{ [id: string]: JSX.Element }>({});
 
   const parseMarkdown = (markdown: string) => {
     const codeBlocks: string[] = [];
@@ -34,7 +34,7 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) =
       } else if (block.startsWith('__INTERACTIVE_BLOCK_')) {
         const interactiveBlockIndex = parseInt(block.match(/__INTERACTIVE_BLOCK_(\d+)__/)?.[1] || '0', 10);
         const blockName = interactiveBlocks[interactiveBlockIndex].replace('<', '').replace('/>', '').replace(' ', '');
-        void createInteractiveBlock(blockName);
+        createInteractiveBlock(blockName);
         return renderInteractiveBlock(blockName, index);
       }
       return renderBlock(block, index);
@@ -90,21 +90,20 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) =
 
   const renderInteractiveBlock = (block: string, index: number): JSX.Element => {
     if (interactiveBlocksState[block]) {
-      return <div key={index} className={`mb-6 ${index}`}>{interactiveBlocksState[block]}</div>;
+      return <div key={index} className="mb-6">{interactiveBlocksState[block]}</div>;
     } else {
-      return <Card key={index} className={`mb-6 p-3 ${block}`}>Loading...</Card>;
+      return <Card key={index} className="mb-6 p-3">Loading...</Card>;
     }
   }
 
   const createInteractiveBlock = async (block: string): Promise<void> => {
-    const obj = await import(`../content/${post_name}/components/${block}.tsx`).then((module) => {
-      return module.default;
-    });
-
+    const obj = await import(`../content/${post_name}/components/${block}.tsx`).then((module) => module.default);
     const interactiveBlock = React.createElement(obj);
-    let tempInteractiveBlocksState = interactiveBlocksState;
-    tempInteractiveBlocksState[block] = interactiveBlock;
-    setInteractiveBlocksState(tempInteractiveBlocksState);
+
+    setInteractiveBlocksState((prevState) => ({
+      ...prevState,
+      [block]: interactiveBlock,
+    }));
   }
 
   const renderCodeBlock = (block: string, index: number): JSX.Element => {
@@ -139,9 +138,9 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) =
   return (
     <Card className="mx-auto my-8 text-primary border-2 border-slate-200">
       <CardContent className="p-6">
-          <article className="prose prose-slate max-w-none">
-            {parseMarkdown(content)}
-          </article>
+        <article className="prose prose-slate max-w-none">
+          {parseMarkdown(content)}
+        </article>
       </CardContent>
     </Card>
   );
