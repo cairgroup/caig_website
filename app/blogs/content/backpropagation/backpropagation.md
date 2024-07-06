@@ -2,6 +2,8 @@
 
 Multi-Layer Perceptron (MLP) neural networks are a fundamental concept in deep learning. They consist of multiple layers of interconnected nodes, or "neurons," that process and transform input data to produce meaningful output.
 
+<BackPropDemo />
+
 ## Structure of an MLP
 
 An MLP typically consists of three types of layers:
@@ -41,8 +43,6 @@ The process involves:
 3. Adjusting weights based on their contribution to the error
 
 Here's a simplified version of backpropagation:
-
-<Test />
 
 ```python
 def backpropagation(inputs, targets, outputs, weights):

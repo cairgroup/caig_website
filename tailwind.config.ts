@@ -23,8 +23,8 @@ module.exports = {
         'blue-custom': '#4457ce',
         'blue-custom-darker': '#232b61',
 
-        'background': '#FAFAFA',
-        'background_2': '#ECEFF1',
+        'background': '#F2F2F2',
+        'background_2': '#e5e6e7',
         'background_3': colors.zinc[300],
         'primary': '#1A237E',
         'primary_2': '#546E7A',

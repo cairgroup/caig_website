@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Link from "next/link";
 import { TypographyH1, TypographyH4 } from "../ui/typography";
@@ -32,16 +32,28 @@ const getPreviousTime = (given_date: Date, days: number): Date => {
   const date = new Date(given_date);
   date.setDate(date.getDate() - days);
   return date;
-}
+};
 
 const getNextTime = (given_date: Date, days: number): Date => {
   const date = new Date(given_date);
   date.setDate(date.getDate() + days);
   return date;
-}
+};
+
+const determineDaysToShow = (): number => {
+  if (window.innerWidth > 1024) {
+    return 7;
+  } else if (window.innerWidth > 640) {
+    return 3;
+  } else {
+    return 2;
+  }
+};
 
 export default function UpcomingEvents() {
   const [events, setEvents] = useState<Event[]>([]);
+  const [days, setDays] = useState<number>(7);
+  const [closestSunday, setClosestSunday] = useState<Date>(getStartOfWeek(new Date(), 7));
 
   useEffect(() => {
     async function fetchEvents() {
@@ -54,8 +66,22 @@ export default function UpcomingEvents() {
     fetchEvents();
   }, []);
 
-  const days = 7;
-  const [closestSunday, setClosestSunday] = useState<Date>(getStartOfWeek(new Date(), days));
+  useEffect(() => {
+    const handleResize = () => {
+      const newDays = determineDaysToShow();
+      setDays(newDays);
+      setClosestSunday(getStartOfWeek(new Date(), newDays));
+    };
+
+    // Set initial days based on the window size
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
 
   return (
     <div className="animate-fade-up flex flex-col items-start justify-start w-full mt-12 bg-background_2 p-5 rounded-lg">
@@ -71,7 +97,7 @@ export default function UpcomingEvents() {
           <Button
             variant="default"
             size="default"
-            className="text-xl border-primary border-2 bg-background hover:bg-primary text-primary hover:text-background group flex items-center"
+            className="text-lg md:text-xl border-primary border-2 bg-background hover:bg-primary text-primary hover:text-background group flex items-center"
           >
             Export Calendar
             <Icons.export className="ml-2" />

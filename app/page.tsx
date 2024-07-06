@@ -4,7 +4,7 @@ import Navbar from "@/components/hero_page/navbar";
 
 export default function Home() {
   return (
-    <div className="p-5 md:p-12">
+    <div className="p-5 md:p-12 flex flex-col">
       <Navbar className="animate-fade-up mb-8" />
       <HeroSection />
       <UpcomingEvents />
