@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { TypographyH1, TypographyH2 } from '@/components/ui/typography';
+import DynamicComponentLoader from './dynamic_component_rendering';
+
 
 interface BlogPostLayoutProps {
   content: string;
@@ -10,8 +12,6 @@ interface BlogPostLayoutProps {
 }
 
 const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) => {
-  const [interactiveBlocksState, setInteractiveBlocksState] = useState<{ [id: string]: JSX.Element }>({});
-
   const parseMarkdown = (markdown: string) => {
     const codeBlocks: string[] = [];
     let processedContent = markdown.replace(/```[\s\S]*?```/g, (match) => {
@@ -34,7 +34,6 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) =
       } else if (block.startsWith('__INTERACTIVE_BLOCK_')) {
         const interactiveBlockIndex = parseInt(block.match(/__INTERACTIVE_BLOCK_(\d+)__/)?.[1] || '0', 10);
         const blockName = interactiveBlocks[interactiveBlockIndex].replace('<', '').replace('/>', '').replace(' ', '');
-        createInteractiveBlock(blockName);
         return renderInteractiveBlock(blockName, index);
       }
       return renderBlock(block, index);
@@ -89,21 +88,9 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) =
   };
 
   const renderInteractiveBlock = (block: string, index: number): JSX.Element => {
-    if (interactiveBlocksState[block]) {
-      return <div key={index} className="mb-6">{interactiveBlocksState[block]}</div>;
-    } else {
-      return <Card key={index} className="mb-6 p-3">Loading...</Card>;
-    }
-  }
-
-  const createInteractiveBlock = async (block: string): Promise<void> => {
-    const obj = await import(`../content/${post_name}/components/${block}.tsx`).then((module) => module.default);
-    const interactiveBlock = React.createElement(obj);
-
-    setInteractiveBlocksState((prevState) => ({
-      ...prevState,
-      [block]: interactiveBlock,
-    }));
+    return (
+      <DynamicComponentLoader key={index} block={block} post_name={post_name} />
+    );
   }
 
   const renderCodeBlock = (block: string, index: number): JSX.Element => {

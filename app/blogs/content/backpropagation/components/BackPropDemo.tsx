@@ -90,47 +90,42 @@ const BackpropagationDemo = () => {
     });
   }, []);
 
-  // useEffect(() => {
-  //   const normalizedInput = [
-  //     normalizeInput(squareFootage, squareFootageConsts.min, squareFootageConsts.max),
-  //     normalizeInput(bathrooms, bathroomsConsts.min, bathroomsConsts.max),
-  //     normalizeInput(bedrooms, bedroomConsts.min, bedroomConsts.max),
-  //   ];
-  //   const rawPrediction = forwardPass(network, normalizedInput);
-  //   setPrediction(denormalizeOutput(rawPrediction, targetConsts.min, targetConsts.max));
-  // }, [network, squareFootage, bathrooms, bedrooms]);
+  useEffect(() => {
+    const normalizedInput = [
+      normalizeInput(squareFootage, squareFootageConsts.min, squareFootageConsts.max),
+      normalizeInput(bathrooms, bathroomsConsts.min, bathroomsConsts.max),
+      normalizeInput(bedrooms, bedroomConsts.min, bedroomConsts.max),
+    ];
+    const rawPrediction = forwardPass(network, normalizedInput);
+    setPrediction(denormalizeOutput(rawPrediction, targetConsts.min, targetConsts.max));
+  }, [network, squareFootage, bathrooms, bedrooms]);
 
   const handleTrain = () => {
-    // const normalizedInputs = trainingData.map(d => d.input.map((v, i) =>
-    //   normalizeInput(
-    //     v,
-    //     [squareFootageConsts.min, bathroomsConsts.min, bedroomConsts.min]?.[i] ?? 0,
-    //     [squareFootageConsts.max, bathroomsConsts.max, bedroomConsts.max]?.[i] ?? 0
-    //   )
-    // ));
-    // const normalizedTargets = trainingData.map(d =>
-    //   normalizeInput(d.target, targetConsts.min, targetConsts.max)
-    // );
-    // const {
-    //   network: newNetwork,
-    //   errorHistory: newErrorHistory
-    // } = train(network, normalizedInputs, normalizedTargets, numEpochs);
-    // setNetwork(newNetwork);
-    // setEpoch(epoch + numEpochs);
+    const normalizedInputs = trainingData.map(d => d.input.map((v, i) =>
+      normalizeInput(
+        v,
+        [squareFootageConsts.min, bathroomsConsts.min, bedroomConsts.min]?.[i] ?? 0,
+        [squareFootageConsts.max, bathroomsConsts.max, bedroomConsts.max]?.[i] ?? 0
+      )
+    ));
+    const normalizedTargets = trainingData.map(d =>
+      normalizeInput(d.target, targetConsts.min, targetConsts.max)
+    );
+    const {
+      network: newNetwork,
+      errorHistory: newErrorHistory
+    } = train(network, normalizedInputs, normalizedTargets, numEpochs);
+    setNetwork(newNetwork);
+    setEpoch(epoch + numEpochs);
 
-    // const tempErrorHistory = [...errorHistory];
-    // tempErrorHistory.push(...newErrorHistory);
-    // setErrorHistory(tempErrorHistory);
-
-    console.log("Hello world");
-    console.log(test);
-    setTest(test + 1);
-    console.log(test);
+    const tempErrorHistory = [...errorHistory];
+    tempErrorHistory.push(...newErrorHistory);
+    setErrorHistory(tempErrorHistory);
   };
 
   return (
     <div className="p-4 max-w-4xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Backpropagation Demo: House Price Prediction</h1>
+      <h1 className="text-2xl text-background font-bold mb-4">Backpropagation Demo: House Price Prediction</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Card>
           <CardHeader>Input Parameters</CardHeader>
@@ -191,7 +186,7 @@ const BackpropagationDemo = () => {
           <CardContent>
             <p className="text-2xl font-bold">${prediction.toLocaleString()}</p>
             <p>Epoch: {epoch}</p>
-            <Button onClick={handleTrain}>Train ({numEpochs} epoch)</Button>
+            <Button className="text-background bg-transparent hover:bg-highlight border-2 border-highlight" onClick={handleTrain}>Train ({numEpochs} epoch)</Button>
           </CardContent>
         </Card>
       </div>

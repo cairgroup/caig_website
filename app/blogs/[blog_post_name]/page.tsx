@@ -10,16 +10,16 @@ import { Card } from '@/components/ui/card';
 
 function BlogPost() {
   const [fileContent, setFileContent] = useState<string | null>('');
-  const { slug } = useParams<{ slug: string }>();
+  const { blog_post_name } = useParams<{ blog_post_name: string }>();
 
   useEffect(() => {
     async function getContent() {
-      const returnStatus = await getFile({ file_name: slug as string });
+      const returnStatus = await getFile({ file_name: blog_post_name as string });
       setFileContent(returnStatus.output);
     }
 
     void getContent();
-  }, [slug])
+  }, [blog_post_name])
 
   if (!fileContent) {
     const code = fileContent == null ? 404 : '';
@@ -40,7 +40,7 @@ function BlogPost() {
   return (
     <div className="p-5 md:p-12">
       <Navbar className="animate-fade-up mb-8" />
-      <BlogPostLayout content={fileContent} post_name={slug} />
+      <BlogPostLayout content={fileContent} post_name={blog_post_name} />
     </div>
   );
 }
