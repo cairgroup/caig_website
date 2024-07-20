@@ -1,6 +1,6 @@
 import { Card } from "../ui/card";
 import { TypographyH1 } from "../ui/typography";
-import BackpropagationDemo from "@/app/reader/content/backpropagation/components/BackPropDemo";
+import BackpropagationDemo from "@/app/blogs/content/backpropagation/components/BackPropDemo";
 
 export default function UpNext() {
   return (

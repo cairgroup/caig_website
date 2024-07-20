@@ -3,15 +3,67 @@
 import React, { useState, useEffect } from 'react';
 import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
-import { Card, CardHeader, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Slider } from '@/components/ui/slider';
 import { Button } from '@/components/ui/button';
 
 import { NeuralNetwork, initializeNetwork, forwardPass, train, initializeNetworkProps } from './utils/neural-network';
 import { NetworkVisualization } from './utils/network-visualization';
-import { readCsv } from './utils/read-data';
+import { TypographyH4 } from '@/components/ui/typography';
+
+type StateConst = {
+  name: string,
+  max: number,
+  min: number,
+  stepCount: number,
+}
+
+const SliderComponent = ({
+  constObj,
+  constState,
+  setConstState
+} : {
+  constObj: StateConst,
+  constState: number,
+  setConstState: (param: number) => void
+}) => {
+  return (
+    <div>
+      <label>{constObj.name}: {constState.toLocaleString()}</label>
+      <Slider min={
+        constObj.min
+      } max={
+        constObj.max
+      } step={
+        constObj.stepCount
+      } value={
+        [constState]
+      } onValueChange={
+        ([value]) => setConstState(value ?? constObj.min)
+      } />
+    </div>
+  );
+}
 
 const BackpropagationDemo = () => {
+  // Initial States
+  const [numLayers, setNumLayers] = useState<number>(1);
+  const [neuronsPerLayer, setNeuronsPerLayer] = useState<number>(5);
+
+  // ARCHITECTURE CONSTANTS
+  const numLayersConsts = {
+    name: 'Number of Hidden Layers',
+    max: 3,
+    min: 1,
+    stepCount: 1
+  }
+  const neuronsPerLayerConsts = {
+    name: 'Neurons Per Hidden Layer',
+    max: 5,
+    min: 1,
+    stepCount: 1
+  }
+
   // CONSTANTS
   const numEpochs = 10;
 
@@ -35,8 +87,8 @@ const BackpropagationDemo = () => {
 
   const networkConfig: initializeNetworkProps = {
     inputSize: trainingData[0]?.input.length ?? 3, // [squareFootage, bathrooms, bedrooms]
-    hiddenLayers: 1,
-    neuronsPerLayer: 5,
+    hiddenLayers: numLayers,
+    neuronsPerLayer: neuronsPerLayer,
     activationFunction: 'ReLU'
   };
 
@@ -83,11 +135,15 @@ const BackpropagationDemo = () => {
   };
 
   useEffect(() => {
-    void readCsv('Housing.csv').then((data) => {
-      console.log(data);
-      // setTrainingData(data);
-    });
-  }, []);
+    setNetwork(initializeNetwork({
+      inputSize: 3, // [squareFootage, bathrooms, bedrooms]
+      hiddenLayers: numLayers,
+      neuronsPerLayer: neuronsPerLayer,
+      activationFunction: 'ReLU'
+    }));
+    setErrorHistory([]);
+    setEpoch(0);
+  }, [neuronsPerLayer, numLayers]);
 
   useEffect(() => {
     const normalizedInput = [
@@ -126,62 +182,57 @@ const BackpropagationDemo = () => {
     <div className="p-4 max-w-4xl mx-auto">
       <h1 className="text-2xl text-background font-bold mb-4">Backpropagation Demo: House Price Prediction</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <Card>
-          <CardHeader>Input Parameters</CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {/* Square Footage */}
-              <div>
-                <label>{squareFootageConsts.name}: {squareFootage.toLocaleString()}</label>
-                <Slider min={
-                  squareFootageConsts.min
-                } max={
-                  squareFootageConsts.max
-                } step={
-                  squareFootageConsts.stepCount
-                } value={
-                  [squareFootage]
-                } onValueChange={
-                  ([value]) => setSquareFootage(value ?? 0)
-                } />
-              </div>
+        <div className="flex flex-col gap-2">
+          <Card>
+            <TypographyH4 className="space-y-1.5 p-6">Input Parameters</TypographyH4>
+            <CardContent>
+              <div className="space-y-4">
+                {/* Square Footage */}
+                <SliderComponent
+                  constObj={squareFootageConsts}
+                  constState={squareFootage}
+                  setConstState={setSquareFootage}
+                />
 
-              {/* Bathrooms */}
-              <div>
-                <label>{bathroomsConsts.name}: {bathrooms.toLocaleString()}</label>
-                <Slider min={
-                  bathroomsConsts.min
-                } max={
-                  bathroomsConsts.max
-                } step={
-                  bathroomsConsts.stepCount
-                } value={
-                  [bathrooms]
-                } onValueChange={
-                  ([value]) => setBathrooms(value ?? 0)
-                } />
-              </div>
+                {/* Bathrooms */}
+                <SliderComponent
+                  constObj={bathroomsConsts}
+                  constState={bathrooms}
+                  setConstState={setBathrooms}
+                />
 
-              {/* Bedrooms */}
-              <div>
-                <label>{bedroomConsts.name}: {bedrooms.toLocaleString()}</label>
-                <Slider min={
-                  bedroomConsts.min
-                } max={
-                  bedroomConsts.max
-                } step={
-                  bedroomConsts.stepCount
-                } value={
-                  [bedrooms]
-                } onValueChange={
-                  ([value]) => setBedrooms(value ?? 0)
-                } />
+                {/* Bedrooms */}
+                <SliderComponent
+                  constObj={bedroomConsts}
+                  constState={bedrooms}
+                  setConstState={setBedrooms}
+                />
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+          <Card>
+            <TypographyH4 className="space-y-1.5 p-6">Neural Network Architecture</TypographyH4>
+            <CardContent>
+              <div className="space-y-4">
+                {/* Number of Hidden Layers */}
+                <SliderComponent
+                  constObj={numLayersConsts}
+                  constState={numLayers}
+                  setConstState={setNumLayers}
+                />
+
+                {/* Neurons Per Hidden Layers */}
+                <SliderComponent
+                  constObj={neuronsPerLayerConsts}
+                  constState={neuronsPerLayer}
+                  setConstState={setNeuronsPerLayer}
+                />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
         <Card>
-          <CardHeader>Prediction</CardHeader>
+          <TypographyH4 className="space-y-1.5 p-6">Prediction</TypographyH4>
           <CardContent>
             <p className="text-2xl font-bold">${prediction.toLocaleString()}</p>
             <p>Epoch: {epoch}</p>

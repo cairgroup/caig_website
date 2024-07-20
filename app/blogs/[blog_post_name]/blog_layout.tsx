@@ -3,7 +3,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { TypographyH1, TypographyH2 } from '@/components/ui/typography';
 import DynamicComponentLoader from './dynamic_component_rendering';
 
-
 interface BlogPostLayoutProps {
   content: string;
   post_name: string;
@@ -43,7 +42,7 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) =
       return <TypographyH1 key={index} className="text-3xl font-bold mb-6 mt-2 text-black">{block.slice(2)}</TypographyH1>;
     } else if (block.startsWith('## ')) {
       return <TypographyH2 key={index} className="text-2xl font-semibold mb-4 mt-6">{block.slice(3)}</TypographyH2>;
-    } else if (block.startsWith('1. ') || block.startsWith('- ')) {
+    } else if (block.startsWith('1. ') || block.startsWith('- ') || block.startsWith('* ')) {
       return renderList(block, index);
     } else if (block.startsWith('> ')) {
       return renderBlockquote(block, index);
