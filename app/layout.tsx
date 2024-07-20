@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main className="flex min-h-screen w-screen flex-col items-start justify-center overflow-hidden bg-background text-black">
-          <div className="w-[300px] sm:w-[600px] md:w-[700px] lg:w-[900px] xl:w-[1200px] self-center">
+          <div className="w-[300px] sm:w-[600px] md:w-[700px] lg:w-[900px] xl:w-[1200px] self-center min-h-screen">
             {children}
           </div>
         </main>

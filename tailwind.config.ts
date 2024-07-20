@@ -26,6 +26,7 @@ module.exports = {
         'background': '#F2F2F2',
         'background_2': '#e5e6e7',
         'background_3': colors.zinc[300],
+        'border_color': colors.slate[400],
         'primary': '#1A237E',
         'primary_2': '#546E7A',
         'highlight': '#00ACC1',

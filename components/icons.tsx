@@ -29,6 +29,9 @@ import {
   SquareArrowOutUpRight,
   type LucideProps,
   ArrowLeft,
+  Wrench,
+  Hammer,
+  Building2,
 } from "lucide-react";
 
 export const Icons = {
@@ -59,6 +62,9 @@ export const Icons = {
   pencil: Pencil,
   pencilRuler: PencilRuler,
   export: SquareArrowOutUpRight,
+  wrench: Wrench,
+  hammer: Hammer,
+  building: Building2,
   gitHub: ({ ...props }: LucideProps) => (
     <svg
       aria-hidden="true"

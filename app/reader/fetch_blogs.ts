@@ -2,15 +2,17 @@
 
 import * as fs from 'fs';
 import { ReturnStatus } from '@/lib/server-action';
+import { BlogMetadata } from './page';
 
-export async function getFile({ file_name } : { file_name: string }): Promise<ReturnStatus> {
+export async function getStaticPropsBlogs(): Promise<ReturnStatus> {
   try {
-    const file = fs.readFileSync(`app/blogs/content/${file_name}/${file_name}.md`, 'utf-8');
+    const blogsMetadata = fs.readFileSync('app/reader/content/metadata.json', 'utf-8');
+    const blogPosts: BlogMetadata[] = JSON.parse(blogsMetadata)
 
     return {
       status: 200,
       statusMessage: "success",
-      output: file,
+      output: blogPosts,
     };
   } catch (error) {
     return {

@@ -84,9 +84,9 @@ export default function UpcomingEvents() {
 
 
   return (
-    <div className="animate-fade-up flex flex-col items-start justify-start w-full mt-12 bg-background_2 p-5 rounded-lg">
+    <div className="animate-fade-up flex flex-col items-start justify-start w-full mt-12 bg-background_2 p-5 px-10 rounded-lg">
       <div className="flex flex-col mb-3 sm:mb-0 sm:flex-row justify-between w-full">
-        <TypographyH1 className='lg:text-3xl md:text-3xl mb-3 text-primary align-middle'>
+        <TypographyH1>
           Upcoming Events
         </TypographyH1>
         <Link

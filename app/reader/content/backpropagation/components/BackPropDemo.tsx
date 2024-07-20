@@ -16,8 +16,8 @@ const BackpropagationDemo = () => {
   const numEpochs = 10;
 
   const trainingData = [
-    { input: [7420, 4, 2], target: 13300000 },
-    { input: [8960, 4, 4], target: 12250000 },
+    { input: [7420,4,2], target: 13300000 },
+    { input: [8960,4,4], target: 12250000 },
     { input: [9960,3,2], target: 12250000 },
     { input: [7500,4,2], target: 12215000 },
     { input: [7420,4,1], target: 11410000 },
@@ -35,8 +35,8 @@ const BackpropagationDemo = () => {
 
   const networkConfig: initializeNetworkProps = {
     inputSize: trainingData[0]?.input.length ?? 3, // [squareFootage, bathrooms, bedrooms]
-    hiddenLayers: 2,
-    neuronsPerLayer: 3,
+    hiddenLayers: 1,
+    neuronsPerLayer: 5,
     activationFunction: 'ReLU'
   };
 
@@ -73,7 +73,6 @@ const BackpropagationDemo = () => {
   const [prediction, setPrediction] = useState(0);
   const [epoch, setEpoch] = useState(0);
   const [errorHistory, setErrorHistory] = useState<number[]>([]);
-  const [test, setTest] = useState(0);
 
   const normalizeInput = (value: number, min: number, max: number) => {
     return (value - min) / (max - min);

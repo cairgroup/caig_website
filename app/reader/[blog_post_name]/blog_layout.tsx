@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { TypographyH1, TypographyH2 } from '@/components/ui/typography';
 import DynamicComponentLoader from './dynamic_component_rendering';
@@ -42,7 +40,7 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) =
 
   const renderBlock = (block: string, index: number): JSX.Element => {
     if (block.startsWith('# ')) {
-      return <TypographyH1 key={index} className="text-3xl font-bold mb-6 mt-8">{block.slice(2)}</TypographyH1>;
+      return <TypographyH1 key={index} className="text-3xl font-bold mb-6 mt-2 text-black">{block.slice(2)}</TypographyH1>;
     } else if (block.startsWith('## ')) {
       return <TypographyH2 key={index} className="text-2xl font-semibold mb-4 mt-6">{block.slice(3)}</TypographyH2>;
     } else if (block.startsWith('1. ') || block.startsWith('- ')) {
@@ -71,7 +69,7 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) =
     const isOrdered = items[0].startsWith('1. ');
     const ListTag = isOrdered ? 'ol' : 'ul';
     return (
-      <ListTag key={index} className={`mb-4 pl-6 ${isOrdered ? 'list-decimal' : 'list-disc'}`}>
+      <ListTag key={index} className={`-mt-2 mb-4 pl-6 ${isOrdered ? 'list-decimal' : 'list-disc'}`}>
         {items.map((item, itemIndex) => (
           <li key={itemIndex} className="mb-2">{renderInlineMarkdown(item.replace(/^\d+\.\s|-\s/, ''))}</li>
         ))}
@@ -81,7 +79,7 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) =
 
   const renderBlockquote = (block: string, index: number): JSX.Element => {
     return (
-      <blockquote key={index} className="border-l-4 border-blue-500 pl-4 py-2 mb-4 bg-gray-800 italic">
+      <blockquote key={index} className="border-l-4 border-blue-500 pl-4 py-2 mb-4 bg-gray-800 text-background rounded-lg italic">
         {renderInlineMarkdown(block.replace(/^>\s/, ''))}
       </blockquote>
     );
@@ -123,7 +121,7 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) =
   };
 
   return (
-    <Card className="mx-auto my-8 text-primary border-2 border-slate-200">
+    <Card className="mx-auto my-8 text-primary border-2 border-border_color bg-background_2">
       <CardContent className="p-6">
         <article className="prose prose-slate max-w-none">
           {parseMarkdown(content)}

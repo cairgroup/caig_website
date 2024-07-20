@@ -4,7 +4,7 @@ import React, { type ComponentPropsWithoutRef } from "react";
 // https://stackoverflow.com/questions/54654303/using-a-forwardref-component-with-children-in-typescript
 
 export const TypographyH1 = React.forwardRef<HTMLHeadingElement, ComponentPropsWithoutRef<"h1">>(({ className,...props }, ref) => (
-  <h1 ref={ref} className={cn("scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl", className)} {...props}/>
+  <h1 ref={ref} className={cn("scroll-m-20 text-3xl font-extrabold tracking-tight mb-3 text-primary align-middle", className)} {...props}/>
 ));
 TypographyH1.displayName = "TypographyH1";
 

@@ -28,7 +28,7 @@ function BlogPost() {
       <div className="p-5 md:p-12 h-screen">
         <Navbar className="animate-fade-up mb-8" />
         <div className='w-full h-full text-center'>
-          <Card className="mx-auto my-8 py-8 border-2 border-slate-200">
+          <Card className="mx-auto my-8 py-8 border-2 border-border_color">
             <TypographyH1>{code}</TypographyH1>
             <TypographyH3>{message}</TypographyH3>
           </Card>
