@@ -24,7 +24,7 @@ export default function HeroSection() {
         </div>
 
         <div className="animate-fade-up flex flex-col md:flex-row lg:flex-col items-center lg:items-start justify-center w-full">
-          <Link target="_blank" href="/#" className="m-3">
+          <Link target="_blank" href="https://airtable.com/appq7OMNjFnhy0hsc/pagXecaSCpghb3dug/form" className="m-3">
             <Button
               variant="default"
               size="lg"
@@ -39,7 +39,7 @@ export default function HeroSection() {
             </Button>
           </Link>
 
-          <Link target="_blank" href="/#" className="m-3">
+          <Link target="_blank" href="https://airtable.com/appq7OMNjFnhy0hsc/pagbmeNb7ahMoDsyg/form" className="m-3">
             <Button
               variant="default"
               size="lg"
