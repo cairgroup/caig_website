@@ -50,6 +50,8 @@ RLHF/PPO relies on frozen reward models, which can only improve as much as the h
 
 ## Resources
 
-* AlphaGeometry: An Olympiad-level AI system for geometry [Paper](https://drive.google.com/file/d/181E2gbWl8-0nbf520QuDCbAtKchO8-zE/view?usp=drive_link), [Blog Post](https://deepmind.google/discover/blog/alphageometry-an-olympiad-level-ai-system-for-geometry/), [Video](https://www.youtube.com/watch?v=TuZhU1CiC0k&ab_channel=TrieuHobbies)
-* Self-Rewarding Language Models [Paper](https://drive.google.com/file/d/1Q389tu12o8JkvbkU8nnGGzrnvsvH2xxC/view?usp=drive_link)
-* Tuning Language Models [Paper](https://drive.google.com/file/d/1gqUiQl2M1hoNDD5EPLiBtFXBZM9BtZcS/view?usp=drive_link)
+AlphaGeometry: An Olympiad-level AI system for geometry [Paper](https://drive.google.com/file/d/181E2gbWl8-0nbf520QuDCbAtKchO8-zE/view?usp=drive_link), [Blog Post](https://deepmind.google/discover/blog/alphageometry-an-olympiad-level-ai-system-for-geometry/), [Video](https://www.youtube.com/watch?v=TuZhU1CiC0k&ab_channel=TrieuHobbies)
+
+Self-Rewarding Language Models [Paper](https://drive.google.com/file/d/1Q389tu12o8JkvbkU8nnGGzrnvsvH2xxC/view?usp=drive_link)
+
+Tuning Language Models [Paper](https://drive.google.com/file/d/1gqUiQl2M1hoNDD5EPLiBtFXBZM9BtZcS/view?usp=drive_link)

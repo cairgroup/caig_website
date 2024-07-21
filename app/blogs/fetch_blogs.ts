@@ -15,6 +15,7 @@ export async function getStaticPropsBlogs(): Promise<ReturnStatus> {
       output: blogPosts,
     };
   } catch (error) {
+    console.error(error);
     return {
       status: 404,
       statusMessage: "error",

@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { TypographyH1, TypographyH2 } from '@/components/ui/typography';
 import DynamicComponentLoader from './dynamic_component_rendering';
+import Link from 'next/link';
 
 interface BlogPostLayoutProps {
   content: string;
@@ -10,38 +11,39 @@ interface BlogPostLayoutProps {
 
 const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) => {
   const parseMarkdown = (markdown: string) => {
-    const codeBlocks: string[] = [];
-    let processedContent = markdown.replace(/```[\s\S]*?```/g, (match) => {
-      codeBlocks.push(match);
-      return `__CODE_BLOCK_${codeBlocks.length - 1}__`;
+    const code_blocks: string[] = [];
+    let processed_content = markdown.replace(/```[\s\S]*?```/g, (match) => {
+      code_blocks.push(match);
+      return `__CODE_BLOCK_${code_blocks.length - 1}__`;
     });
 
     const interactiveBlocks: string[] = [];
-    processedContent = processedContent.replace(/<[\s\S]*?\/>/g, (match) => {
+    processed_content = processed_content.replace(/<[\s\S]*?\/>/g, (match) => {
       interactiveBlocks.push(match);
       return `__INTERACTIVE_BLOCK_${interactiveBlocks.length - 1}__`;
     });
 
-    const blocks = processedContent.split(/\n{2,}/);
+    const blocks = processed_content.split(/\n{2,}/);
 
     return blocks.map((block, index) => {
       if (block.startsWith('__CODE_BLOCK_')) {
-        const codeBlockIndex = parseInt(block.match(/__CODE_BLOCK_(\d+)__/)?.[1] || '0', 10);
-        return renderCodeBlock(codeBlocks[codeBlockIndex], index);
+        const code_block_index = parseInt(block.match(/__CODE_BLOCK_(\d+)__/)?.[1] || '0', 10);
+        return renderCodeBlock(code_blocks[code_block_index], index);
       } else if (block.startsWith('__INTERACTIVE_BLOCK_')) {
         const interactiveBlockIndex = parseInt(block.match(/__INTERACTIVE_BLOCK_(\d+)__/)?.[1] || '0', 10);
         const blockName = interactiveBlocks[interactiveBlockIndex].replace('<', '').replace('/>', '').replace(' ', '');
         return renderInteractiveBlock(blockName, index);
       }
+
       return renderBlock(block, index);
     });
   };
 
   const renderBlock = (block: string, index: number): JSX.Element => {
     if (block.startsWith('# ')) {
-      return <TypographyH1 key={index} className="text-3xl font-bold mb-6 mt-2 text-black">{block.slice(2)}</TypographyH1>;
+      return <TypographyH1 key={index} className="text-3xl font-bold mb-6 mt-2 text-black">{renderInlineMarkdown(block.slice(2))}</TypographyH1>;
     } else if (block.startsWith('## ')) {
-      return <TypographyH2 key={index} className="text-2xl font-semibold mb-4 mt-6">{block.slice(3)}</TypographyH2>;
+      return <TypographyH2 key={index} className="text-2xl font-semibold mb-4 mt-6">{renderInlineMarkdown(block.slice(3))}</TypographyH2>;
     } else if (block.startsWith('1. ') || block.startsWith('- ') || block.startsWith('* ')) {
       return renderList(block, index);
     } else if (block.startsWith('> ')) {
@@ -52,12 +54,16 @@ const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) =
   };
 
   const renderInlineMarkdown = (text: string): (string | JSX.Element)[] => {
-    const parts = text.split(/(\*\*.*?\*\*|\`.*?\`)/g);
+    const parts = text.split(/(\*\*.*?\*\*|\`.*?\`|\[.*?\]\(.*?\))/g);
+
     return parts.map((part, index) => {
       if (part.startsWith('**') && part.endsWith('**')) {
         return <strong key={index} className="font-semibold">{part.slice(2, -2)}</strong>;
       } else if (part.startsWith('`') && part.endsWith('`')) {
         return <code key={index} className="bg-gray-700 text-gray-200 px-1 rounded">{part.slice(1, -1)}</code>;
+      } else if (part.startsWith('[') && part.includes('](') && part.endsWith(')')) {
+        const link_arr = part.replace('[', '').replace(')', '').split('](');
+        return <Link href={link_arr[1]} key={index}>{link_arr[0]}</Link>;
       }
       return part;
     });

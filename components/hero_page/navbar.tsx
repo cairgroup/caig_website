@@ -12,7 +12,7 @@ export default function Navbar({ className, ...props }: React.HTMLAttributes<HTM
         Reading Group Blog
         <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-primary"></span>
       </Link>
-      {/* <Link href="/builder" className="text-sm sm:text-lg text-center sm:text-left group font-medium transition-colors hover:text-highlight">
+      {/* <Link href="/lessons" className="text-sm sm:text-lg text-center sm:text-left group font-medium transition-colors hover:text-highlight">
         Lessons
         <span className="block max-w-0 group-hover:max-w-full transition-all duration-500 h-1 bg-highlight"></span>
       </Link> */}
