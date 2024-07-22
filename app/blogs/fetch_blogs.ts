@@ -6,7 +6,7 @@ import { BlogMetadata } from './page';
 
 export async function getStaticPropsBlogs(): Promise<ReturnStatus> {
   try {
-    const blogsMetadata = fs.readFileSync('app/blogs/content/metadata.json', 'utf-8');
+    const blogsMetadata = fs.readFileSync(process.cwd() + '/app/blogs/content/metadata.json', 'utf-8');
     const blogPosts: BlogMetadata[] = JSON.parse(blogsMetadata)
 
     return {
