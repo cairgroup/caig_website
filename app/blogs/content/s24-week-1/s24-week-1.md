@@ -46,8 +46,6 @@ By definition, training AI to reach superhuman levels requires feedback that tra
 
 RLHF/PPO relies on frozen reward models, which can only improve as much as the human feedback allows. In contrast, DPO leverages direct human preferences without freezing the reward model, enabling a more dynamic and effective training process. This method, however, still encounters bottlenecks from human performance, necessitating further innovation.
 
-
-
 ## Resources
 
 AlphaGeometry: An Olympiad-level AI system for geometry [Paper](https://drive.google.com/file/d/181E2gbWl8-0nbf520QuDCbAtKchO8-zE/view?usp=drive_link), [Blog Post](https://deepmind.google/discover/blog/alphageometry-an-olympiad-level-ai-system-for-geometry/), [Video](https://www.youtube.com/watch?v=TuZhU1CiC0k&ab_channel=TrieuHobbies)
