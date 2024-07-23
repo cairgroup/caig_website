@@ -1,12 +1,17 @@
 "use server";
 
 import * as fs from 'fs';
+import path from 'path';
 import { ReturnStatus } from '@/lib/server-action';
 import { BlogMetadata } from './page';
 
 export async function getStaticPropsBlogs(): Promise<ReturnStatus> {
   try {
-    const blogsMetadata = fs.readFileSync(`${process.cwd()}/public/content/metadata.json`, 'utf-8');
+
+    const filePath = path.join(process.cwd(), 'public', 'content', 'metadata.json');
+    // const fileContents = fs.readFileSync(filePath, 'utf8');
+    // const metadata = JSON.parse(fileContents);
+    const blogsMetadata = fs.readFileSync(filePath, 'utf-8');
     const blogPosts: BlogMetadata[] = JSON.parse(blogsMetadata)
 
     return {

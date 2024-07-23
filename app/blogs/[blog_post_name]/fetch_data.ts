@@ -5,7 +5,7 @@ import { ReturnStatus } from '@/lib/server-action';
 
 export async function getFile({ file_name } : { file_name: string }): Promise<ReturnStatus> {
   try {
-    const file = fs.readFileSync(`${process.cwd()}/content/${file_name}/${file_name}.md`, 'utf-8');
+    const file = fs.readFileSync(`/content/${file_name}/${file_name}.md`, 'utf-8');
 
     return {
       status: 200,

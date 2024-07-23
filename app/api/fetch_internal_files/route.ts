@@ -11,7 +11,7 @@ export async function GET(req: Request): Promise<NextResponse> {
     }
 
     // Use async/await to read the file
-    const file = await fs.readFile(`${process.cwd()}/public/content/${file_name}/${file_name}.md`, 'utf-8');
+    const file = await fs.readFile(`public/content/${file_name}/${file_name}.md`, 'utf-8');
 
     return NextResponse.json({
       status: 200,
@@ -26,3 +26,4 @@ export async function GET(req: Request): Promise<NextResponse> {
     });
   }
 }
+// public/content/${file_name}/${file_name}.
