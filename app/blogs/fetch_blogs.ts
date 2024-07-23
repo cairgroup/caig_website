@@ -10,7 +10,14 @@ export async function getStaticPropsBlogs(): Promise<ReturnStatus> {
     const filePath = path.join('public', 'content', 'metadata.json');
     // const fileContents = fs.readFileSync(filePath, 'utf8');
     // const metadata = JSON.parse(fileContents);
-    const blogsMetadata = fs.readFileSync('public/content/metadata.json', 'utf-8');
+    const file2 = path.resolve(__dirname, '../../public/content/metadata.json');
+    const file = path.join(process.cwd(), '/public/content/metadata.json');
+    console.log(file);
+    console.log(file2);
+    const blogsMetadata = fs.readFileSync(file, 'utf-8');
+    const blogsMetadata2 = fs.readFileSync(file2, 'utf-8');
+    console.log(blogsMetadata);
+    console.log(blogsMetadata2);
     const blogPosts: BlogMetadata[] = JSON.parse(blogsMetadata)
 
     return {
