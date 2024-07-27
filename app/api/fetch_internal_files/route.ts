@@ -1,4 +1,5 @@
 import { promises as fs } from 'fs';
+import path from 'path';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request): Promise<NextResponse> {
@@ -10,8 +11,7 @@ export async function GET(req: Request): Promise<NextResponse> {
       throw new Error("File name is missing");
     }
 
-    // Use async/await to read the file
-    const file = await fs.readFile(`content/${file_name}/${file_name}.md`, 'utf-8');
+    const file = await fs.readFile(path.join(process.cwd(), `content/${file_name}/${file_name}.md`), 'utf-8');
 
     return NextResponse.json({
       status: 200,

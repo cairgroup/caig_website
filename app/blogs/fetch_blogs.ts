@@ -11,7 +11,7 @@ export async function getStaticProps(): Promise<ReturnStatus> {
 
     const blogs: BlogMetadata[] = main_directory.map((dir_name) => {
       const markdown = fs.readFileSync(
-        path.join('content', dir_name, dir_name + '.md'),
+        path.join(process.cwd(), 'content', dir_name, dir_name + '.md'),
         'utf-8'
       );
 
