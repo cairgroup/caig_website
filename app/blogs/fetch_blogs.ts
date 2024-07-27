@@ -7,7 +7,7 @@ import { BlogMetadata } from './page';
 
 export async function getStaticProps(): Promise<ReturnStatus> {
   try {
-    const main_directory = fs.readdirSync(path.join('content'));
+    const main_directory = fs.readdirSync(path.join(process.cwd(), 'content'));
 
     const blogs: BlogMetadata[] = main_directory.map((dir_name) => {
       const markdown = fs.readFileSync(
