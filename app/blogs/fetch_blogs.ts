@@ -10,6 +10,7 @@ export async function getStaticProps(): Promise<ReturnStatus> {
     const main_directory = fs.readdirSync(path.join(process.cwd(), 'content'));
 
     const blogs: BlogMetadata[] = main_directory.map((dir_name) => {
+      console.log(path.join(process.cwd(), 'content', dir_name, dir_name + '.md'));
       const markdown = fs.readFileSync(
         path.join(process.cwd(), 'content', dir_name, dir_name + '.md'),
         'utf-8'

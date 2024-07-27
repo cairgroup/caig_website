@@ -11,6 +11,7 @@ export async function GET(req: Request): Promise<NextResponse> {
       throw new Error("File name is missing");
     }
 
+    console.log(path.join(process.cwd(), `content/${file_name}/${file_name}.md`));
     const file = await fs.readFile(path.join(process.cwd(), `content/${file_name}/${file_name}.md`), 'utf-8');
 
     return NextResponse.json({
