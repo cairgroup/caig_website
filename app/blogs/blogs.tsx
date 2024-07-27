@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { BlogMetadata } from './page';
 import { Card } from '@/components/ui/card';
 import { TypographyH3, TypographySmall } from '@/components/ui/typography';
+import { BlogMetadata } from './page';
 
 export default function Blogs({ blogs } : { blogs: BlogMetadata[] }) {
   return (

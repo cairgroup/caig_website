@@ -1,15 +1,16 @@
 "use client";
 
 import Navbar from '@/components/hero_page/navbar';
+import Blogs from './blogs';
 import { useEffect, useState } from 'react';
 import { TypographyH1 } from '@/components/ui/typography';
-import { getStaticPropsBlogs } from './fetch_blogs';
-import Blogs from './blogs';
+import { getStaticProps } from './fetch_blogs';
 
 export interface BlogMetadata {
-  slug: string,
+  published: boolean,
   title: string,
   author: string,
+  slug: string,
   date: string,
 }
 
@@ -19,7 +20,10 @@ function BlogsPage() {
 
   useEffect(() => {
     async function getBlogs() {
-      const fetchBlogs = await getStaticPropsBlogs();
+      const fetchBlogs = await getStaticProps();
+
+      console.log(fetchBlogs);
+
       if (fetchBlogs.status != 200) {
         setIsLoading(false);
         return;

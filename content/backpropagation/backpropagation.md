@@ -1,3 +1,10 @@
+---
+title: The No-Bullsh*t Guide to Back Propagation
+date: 08/01/2024
+author: Eli Olcott and Davin Jeong
+published: false
+---
+
 # The No-Bullsh*t Guide to Back Propagation
 
 Possible titles:

@@ -12,7 +12,7 @@ const DynamicComponentLoader: React.FC<DynamicComponentLoaderProps> = ({ block, 
   useEffect(() => {
     const loadComponent = async () => {
       try {
-        const component = await import(`${process.cwd()}/public/content/${post_name}/components/${block}.tsx`);
+        const component = await import(`${process.env.BLOG_FILE_PATH}/${post_name}/components/${block}.tsx`);
         setComponent(() => component.default);
       } catch (error) {
         console.error(`Error loading component ${block}:`, error);

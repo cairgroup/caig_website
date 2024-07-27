@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { TypographyH1, TypographyH2 } from '@/components/ui/typography';
 import DynamicComponentLoader from './dynamic_component_rendering';
 import Link from 'next/link';
+import assert from 'assert';
 
 interface BlogPostLayoutProps {
   content: string;
@@ -11,8 +12,12 @@ interface BlogPostLayoutProps {
 
 const BlogPostLayout: React.FC<BlogPostLayoutProps> = ({ content, post_name }) => {
   const parseMarkdown = (markdown: string) => {
+    const processd_markdown = markdown.split('---')[2];
+
+    assert(processd_markdown, "No header was created in the Markdown file.");
+
     const code_blocks: string[] = [];
-    let processed_content = markdown.replace(/```[\s\S]*?```/g, (match) => {
+    let processed_content = processd_markdown.replace(/```[\s\S]*?```/g, (match) => {
       code_blocks.push(match);
       return `__CODE_BLOCK_${code_blocks.length - 1}__`;
     });

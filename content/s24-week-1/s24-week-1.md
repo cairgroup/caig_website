@@ -1,3 +1,10 @@
+---
+title: Spring 2024, Week 1 - AlphaGeometry, Self-Rewarding Models, and Tuning Models by Proxy
+date: 01/29/2024
+author: Ron Nachum and Eli Olcott
+published: true
+---
+
 # AlphaGeometry, Self-Rewarding Models, and Tuning Models by Proxy
 
 **Notes by Ron Nachum, Blog by Eli Olcott**
