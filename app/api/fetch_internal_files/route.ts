@@ -15,7 +15,6 @@ export async function GET(req: Request): Promise<NextResponse> {
     const file = fs.readFileSync(
       path.join(process.cwd(), `content/${file_name}/${file_name}.md`), 'utf-8'
     );
-    throw new Error (`FAILED MISERABLY: ${file}`);
 
     return NextResponse.json({
       status: 200,

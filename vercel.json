@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "app/**/*.[jt]s": {
-      "includeFiles": "content/**"
-    }
-  }
-}
