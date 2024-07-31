@@ -1,5 +1,3 @@
-import { promises as fs } from 'fs';
-import path from 'path';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request): Promise<NextResponse> {
@@ -11,8 +9,17 @@ export async function GET(req: Request): Promise<NextResponse> {
       throw new Error("File name is missing");
     }
 
-    console.log(path.resolve('.', `content/${file_name}/${file_name}.md`));
-    const file = await fs.readFile(path.resolve('.', `content/${file_name}/${file_name}.md`), 'utf-8');
+    const request = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.BLOG_FILE_PATH}/${file_name}/${file_name}.md`
+    );
+
+    if (!request.ok) {
+      throw new Error(
+        `Failed to fetch /${process.env.BLOG_FILE_PATH}/${file_name}/${file_name}.md: ${request.statusText}`
+      );
+    }
+
+    const file = await request.text();
 
     return NextResponse.json({
       status: 200,

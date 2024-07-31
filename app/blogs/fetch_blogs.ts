@@ -5,36 +5,45 @@ import path from 'path';
 import { ReturnStatus } from '@/lib/server-action';
 import { BlogMetadata } from './page';
 
+const fetchBlogMetadata = async (dir_name: string) => {
+  const request = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.BLOG_FILE_PATH}/${dir_name}/${dir_name}.md`);
+
+  if (!request.ok) {
+    throw new Error(`Failed to fetch /${process.env.BLOG_FILE_PATH}/${dir_name}/${dir_name}.md: ${request.statusText}`);
+  }
+
+  const markdown = await request.text();
+
+  const header_lines = markdown.split('---')[1].split('\n');
+  const blog_metadata: { [key: string]: any } = {};
+  for (const header_line of header_lines) {
+    const [json_title, json_info] = header_line.split(': ');
+    blog_metadata[json_title] = json_info;
+  }
+
+  blog_metadata['slug'] = dir_name;
+  blog_metadata['published'] = blog_metadata['published'] === 'true';
+
+  return blog_metadata as BlogMetadata;
+}
+
 export async function getStaticProps(): Promise<ReturnStatus> {
   try {
-    const main_directory = fs.readdirSync(path.resolve(process.cwd(), 'content'));
+    const main_directory = fs.readdirSync(path.resolve(
+      process.cwd(), `public/${process.env.BLOG_FILE_PATH}`
+    ));
+    const blogs: BlogMetadata[] = [];
 
-    const blogs: BlogMetadata[] = main_directory.map((dir_name) => {
-      console.log(path.resolve(process.cwd(), 'content', dir_name, dir_name + '.md'));
-      const markdown = fs.readFileSync(
-        path.resolve('.', 'content', dir_name, dir_name + '.md'),
-        'utf-8'
-      );
-
-      const header_lines = markdown.split('---')[1].split('\n');
-      const blog_metadata: { [key: string]: any } = {};
-      for (const header_line of header_lines) {
-        const [json_title, json_info] = header_line.split(': ');
-        blog_metadata[json_title] = json_info;
-      }
-
-      blog_metadata['slug'] = dir_name;
-      blog_metadata['published'] = blog_metadata['published'] === 'true';
-
-      return blog_metadata as BlogMetadata;
-    }).filter((blog_metadata) => {
-      return blog_metadata['published'];
-    });
+    for (const dir of main_directory) {
+      blogs.push(await fetchBlogMetadata(dir));
+    }
 
     return {
       status: 200,
       statusMessage: 'success',
-      output: blogs,
+      output: blogs.filter((blog_metadata) => {
+        return blog_metadata['published'];
+      }),
     }
   } catch (error: any) {
     return {
