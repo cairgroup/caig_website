@@ -2,11 +2,13 @@
 
 import * as fs from 'fs';
 import path from 'path';
+import { getBaseUrl } from '@/lib/environment';
 import { ReturnStatus } from '@/lib/server-action';
 import { BlogMetadata } from './page';
 
 const fetchBlogMetadata = async (dir_name: string) => {
-  const request = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.BLOG_FILE_PATH}/${dir_name}/${dir_name}.md`);
+  const base_url = getBaseUrl();
+  const request = await fetch(`${base_url}/${process.env.BLOG_FILE_PATH}/${dir_name}/${dir_name}.md`);
 
   if (!request.ok) {
     throw new Error(`Failed to fetch /${process.env.BLOG_FILE_PATH}/${dir_name}/${dir_name}.md: ${request.statusText}`);

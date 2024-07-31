@@ -1,3 +1,4 @@
+import { getBaseUrl } from '@/lib/environment';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request): Promise<NextResponse> {
@@ -9,13 +10,15 @@ export async function GET(req: Request): Promise<NextResponse> {
       throw new Error("File name is missing");
     }
 
+    const base_url = getBaseUrl();
+
     const request = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/${process.env.BLOG_FILE_PATH}/${file_name}/${file_name}.md`
+      `${base_url}/${process.env.BLOG_FILE_PATH}/${file_name}/${file_name}.md`
     );
 
     if (!request.ok) {
       throw new Error(
-        `Failed to fetch /${process.env.BLOG_FILE_PATH}/${file_name}/${file_name}.md: ${request.statusText}`
+        `Failed to fetch /${base_url}/${file_name}/${file_name}.md: ${request.statusText}`
       );
     }
 
