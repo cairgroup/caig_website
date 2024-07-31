@@ -20,16 +20,17 @@ function BlogsPage() {
 
   useEffect(() => {
     async function getBlogs() {
-      const fetchBlogs = await getStaticProps();
+      const returnStatus: { status: number, statusMessage: string, output: BlogMetadata[] | null } = await fetch(
+        `/api/fetch_internal_files`,
+        {
+          method: 'GET',
+        }
+      ).then((response) => response.json());
 
-      console.log(fetchBlogs);
-
-      if (fetchBlogs.status != 200) {
-        setIsLoading(false);
-        return;
+      if (returnStatus.status === 200) {
+        setBlogs(returnStatus.output);
       }
 
-      setBlogs(fetchBlogs.output);
       setIsLoading(false);
     }
 

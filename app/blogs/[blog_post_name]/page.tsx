@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { TypographyH1, TypographyH3 } from '@/components/ui/typography';
 import { Card } from '@/components/ui/card';
-import { getFile } from './fetch_data';
 
 function BlogPost() {
   const [fileContent, setFileContent] = useState<string | null>('');
@@ -15,12 +14,11 @@ function BlogPost() {
   useEffect(() => {
     async function getContent() {
       const returnStatus: { status: number, statusMessage: string, output: string } = await fetch(
-        `/api/fetch_internal_files?fileName=${blog_post_name}`,
+        `/api/fetch_internal_file?fileName=${blog_post_name}`,
         {
           method: 'GET',
         }
       ).then((response) => response.json());
-      // const returnStatus = await getFile({ file_name: blog_post_name as string });
       setFileContent(returnStatus.output);
     }
 
