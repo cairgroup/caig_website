@@ -92,12 +92,12 @@ export default function UpcomingEvents() {
         <Link
           target="_blank"
           href="https://calendar.google.com/calendar/u/0?cid=Y19iODJlN2Y2NDk5ZjQwNWQ2NDFhMmRkMTBhZmQzOTg2Njk0NzNlZTc3ZTRiOGYzZmU4NTFiZThkMWEyNTljZjliQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20"
-          className="align-top"
+          className="align-top self-center"
         >
           <Button
             variant="default"
             size="default"
-            className="text-lg md:text-xl border-primary border-2 bg-background hover:bg-primary text-primary hover:text-background group flex items-center"
+            className="text-sm sm:text-lg md:text-xl border-primary border-2 bg-background hover:bg-primary text-primary hover:text-background group flex items-center"
           >
             Export Calendar
             <Icons.export className="ml-2" />

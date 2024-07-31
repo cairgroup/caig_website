@@ -231,12 +231,12 @@ const BackpropagationDemo = () => {
             </CardContent>
           </Card>
         </div>
-        <Card>
+        <Card className='mb-2'>
           <TypographyH4 className="space-y-1.5 p-6">Prediction</TypographyH4>
           <CardContent>
-            <p className="text-2xl font-bold">${prediction.toLocaleString()}</p>
+            <p className="sm:text-2xl font-bold">${prediction.toLocaleString()}</p>
             <p>Epoch: {epoch}</p>
-            <Button className="text-background bg-transparent hover:bg-highlight border-2 border-highlight" onClick={handleTrain}>Train ({numEpochs} epoch)</Button>
+            <Button className="text-background bg-transparent hover:bg-highlight border-2 border-highlight mt-2" onClick={handleTrain}>Train ({numEpochs} epoch)</Button>
           </CardContent>
         </Card>
       </div>

@@ -9,7 +9,11 @@ export const NetworkVisualization = ({ network }: { network: NeuralNetwork }) =>
     if (svgRef.current) {
       const svg = svgRef.current;
       const rect = svg.getBoundingClientRect();
-      svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
+      if (rect.width > 300) {
+        svg.setAttribute('viewBox', `0 0 ${rect.width} ${rect.height}`);
+      } else {
+        svg.setAttribute('viewBox', `0 0 ${rect.width * 2.5} ${rect.height}`);
+      }
     }
   }, []);
 

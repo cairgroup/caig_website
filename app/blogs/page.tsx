@@ -4,7 +4,6 @@ import Navbar from '@/components/hero_page/navbar';
 import Blogs from './blogs';
 import { useEffect, useState } from 'react';
 import { TypographyH1 } from '@/components/ui/typography';
-import { getStaticProps } from './fetch_blogs';
 
 export interface BlogMetadata {
   published: boolean,
