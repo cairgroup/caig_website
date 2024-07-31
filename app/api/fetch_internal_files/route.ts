@@ -1,4 +1,5 @@
-import { getBaseUrl } from '@/lib/environment';
+import path from 'path';
+import fs from 'fs';
 import { NextResponse } from 'next/server';
 
 export async function GET(req: Request): Promise<NextResponse> {
@@ -10,19 +11,8 @@ export async function GET(req: Request): Promise<NextResponse> {
       throw new Error("File name is missing");
     }
 
-    const base_url = getBaseUrl();
-
-    const request = await fetch(
-      `${base_url}/${process.env.BLOG_FILE_PATH}/${file_name}/${file_name}.md`
-    );
-
-    if (!request.ok) {
-      throw new Error(
-        `Failed to fetch /${base_url}/${file_name}/${file_name}.md: ${request.statusText}`
-      );
-    }
-
-    const file = await request.text();
+    console.log(path.resolve(process.cwd(), `content/${file_name}/${file_name}.md`));
+    const file = fs.readFileSync(path.join(process.cwd(), `content/${file_name}/${file_name}.md`), 'utf-8');
 
     return NextResponse.json({
       status: 200,
