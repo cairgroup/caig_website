@@ -17,6 +17,8 @@ export async function getStaticProps(): Promise<ReturnStatus> {
         'utf-8'
       );
 
+      throw new Error (`FAILED MISERABLY: ${markdown}`);
+
       const header_lines = markdown.split('---')[1].split('\n');
       const blog_metadata: { [key: string]: any } = {};
       for (const header_line of header_lines) {
