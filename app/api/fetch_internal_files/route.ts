@@ -12,7 +12,9 @@ export async function GET(req: Request): Promise<NextResponse> {
     }
 
     console.log(path.resolve(process.cwd(), `content/${file_name}/${file_name}.md`));
-    const file = fs.readFileSync(path.join(process.cwd(), `content/${file_name}/${file_name}.md`), 'utf-8');
+    const file = fs.readFileSync(
+      path.join(process.cwd(), `content/${file_name}/${file_name}.md`), 'utf-8'
+    );
 
     return NextResponse.json({
       status: 200,
